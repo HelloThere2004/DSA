@@ -1,0 +1,19 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function(nums) {
+    let size = nums.length()
+    
+    if (size <= 2) {
+        return max(size[1], size[2])
+    } 
+    
+    dp = []
+    dp[1] = nums[1]
+    dp[2] = nums[2]
+    for (let i = 3; i <= size; i++) {
+        dp[i] = max(dp[i-2] + nums[i], dp[i-1])
+    }
+    return dp[i]
+};
