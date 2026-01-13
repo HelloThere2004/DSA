@@ -13,11 +13,11 @@ var groupAnagrams = function(strs) {
         sortedKey.sort()
         sortedKey = sortedKey.join('')
 
-        //If the key has not existed yet, create a new array, and then set this array with the sorted key
+        //If the key doesn't exist, create a new array, and then set this array with the sorted key
         if (!map.has(sortedKey)) {
             map.set(sortedKey, [])
         } 
-        //If the key existed, get the created array by the key, push the original word to that array 
+        //If the key exists, get the create array by the key, push the original word to that array 
         map.get(sortedKey).push(originalWord)
 
         
@@ -27,7 +27,7 @@ var groupAnagrams = function(strs) {
     return Array.from(map.values());
 };
 
-// --- 🧪 TEST SUITE (KHÔNG SỬA PHẦN NÀY) ---
+// --- 🧪 TEST SUITE (DO NOT MODIFY) ---
 
 function runTest(testName, input, expectedDesc) {
     console.log(`\n========================================`);
@@ -37,51 +37,51 @@ function runTest(testName, input, expectedDesc) {
     
     try {
         const result = groupAnagrams(input);
-        console.log(`📤 Your Output:`, result);
+        console.log(`📤 Your Output:`, JSON.stringify(result));
         
-        // Check kiểu dữ liệu trả về
+        // Check return type
         if (!Array.isArray(result)) {
-            console.log(`❌ FAIL: Kết quả trả về không phải là Array!`);
+            console.log(`❌ FAIL: Return value is not an Array!`);
         } else if (result.length === 0 && input.length > 0) {
-             console.log(`⚠️  WARNING: Output là mảng rỗng [] (Có thể lỗi ở dòng return hoặc logic thêm vào map)`);
+             console.log(`⚠️  WARNING: Output is an empty array []. Check your 'push' logic!`);
         } else {
-             console.log(`ℹ️  Hãy tự so sánh Output với Expected ở trên.`);
+             console.log(`ℹ️  INFO: Manually compare Output with Expected above.`);
         }
     } catch (e) {
-        console.log(`🔥 CRASH (Lỗi Code): ${e.message}`);
+        console.log(`🔥 CRASH (Runtime Error): ${e.message}`);
         console.log(e.stack);
     }
 }
 
-// Case 1: Đề bài LeetCode
+// Case 1: Standard LeetCode Example
 runTest(
     "Standard Case", 
     ["eat", "tea", "tan", "ate", "nat", "bat"], 
-    '[["bat"], ["nat","tan"], ["ate","eat","tea"]] (Thứ tự không quan trọng)'
+    '[["bat"], ["nat","tan"], ["ate","eat","tea"]] (Order does not matter)'
 );
 
-// Case 2: Chuỗi rỗng (Edge case)
+// Case 2: Empty String (Edge Case)
 runTest(
     "Empty String", 
     [""], 
     '[[""]]'
 );
 
-// Case 3: Một ký tự
+// Case 3: Single Character
 runTest(
     "Single Char", 
     ["a"], 
     '[["a"]]'
 );
 
-// Case 4: Không có cặp nào giống nhau
+// Case 4: No Anagrams found
 runTest(
     "No Anagrams", 
     ["rat", "car"], 
     '[["rat"], ["car"]]'
 );
 
-// Case 5: Có từ bị trùng lặp (Logic test)
+// Case 5: Duplicates (Logic check)
 runTest(
     "Duplicates", 
     ["tea", "tea"], 
